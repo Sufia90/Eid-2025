@@ -1,408 +1,114 @@
-/* =============================================
-   CSS VARIABLES
-   ============================================= */
-:root {
-  --bg:         #03050f;
-  --navy:       #070c22;
-  --gold:       #f5c842;
-  --gold2:      #ffe066;
-  --teal:       #00ffe0;
-  --red:        #ff5555;
-  --green:      #55ff99;
-  --pink:       #ff88cc;
-  --white-soft: #fff8e7;
-  --muted:      rgba(255,248,231,0.6);
-  --font-title: 'Cinzel Decorative', serif;
-  --font-arabic:'Amiri', serif;
-  --font-body:  'Raleway', sans-serif;
-}
-
-/* =============================================
-   RESET
-   ============================================= */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* =============================================
-   BODY
-   ============================================= */
+```css
 body {
-  min-height: 100vh;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle, #0b1a3a, #000);
   overflow: hidden;
-  font-family: var(--font-body);
-  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+  color: gold;
+  text-align: center;
 }
 
-/* =============================================
-   CANVAS — JS draws stars here
-   ============================================= */
-#bgCanvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
+.container {
+  position: relative;
   height: 100%;
-  z-index: 0;
-  pointer-events: none;
 }
 
-/* =============================================
-   FLOATING ORBS — Large blurry glows
-   ============================================= */
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 1;
-  animation: orbDrift 10s ease-in-out infinite;
-}
-
-.orb1 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(90,40,180,0.35), transparent 70%);
-  top: -150px; left: -150px;
-  animation-delay: 0s;
-}
-
-.orb2 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(0,200,180,0.2), transparent 70%);
-  bottom: -100px; right: -100px;
-  animation-delay: 3s;
-}
-
-.orb3 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(245,200,66,0.12), transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation-delay: 6s;
-}
-
-@keyframes orbDrift {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%       { transform: translateY(-30px) scale(1.05); }
-}
-
-/* =============================================
-   MAIN CARD
-   ============================================= */
-.card {
-  position: relative;
-  z-index: 10;
-  width: min(580px, 94vw);
-  background: linear-gradient(170deg, #0d1240 0%, #080b28 40%, #050818 70%, #020510 100%);
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(245,200,66,0.35);
-  box-shadow:
-    0 0 0 1px rgba(245,200,66,0.08),
-    0 0 60px rgba(245,200,66,0.12),
-    0 0 120px rgba(100,60,200,0.15),
-    0 40px 100px rgba(0,0,0,0.9);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: cardAppear 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Geometric pattern overlay */
-.card::before {
-  content: '';
+/* Title */
+h1 {
   position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient( 45deg, rgba(245,200,66,0.04) 0, rgba(245,200,66,0.04) 1px, transparent 0, transparent 50%),
-    repeating-linear-gradient(-45deg, rgba(245,200,66,0.04) 0, rgba(245,200,66,0.04) 1px, transparent 0, transparent 50%);
-  background-size: 18px 18px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Inner border frame */
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border-radius: 18px;
-  border: 1px solid rgba(245,200,66,0.12);
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes cardAppear {
-  from { opacity: 0; transform: translateY(50px) scale(0.9); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* =============================================
-   GOLD CORNER PIECES
-   ============================================= */
-.corner {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  z-index: 5;
-}
-
-.c-tl { top:14px; left:14px;   border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
-.c-tr { top:14px; right:14px;  border-top:2px solid var(--gold); border-right:2px solid var(--gold); }
-.c-bl { bottom:14px; left:14px;  border-bottom:2px solid var(--gold); border-left:2px solid var(--gold); }
-.c-br { bottom:14px; right:14px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); }
-
-/* =============================================
-   FIREWORK CONTAINERS + SPARKS
-   ============================================= */
-.fw {
-  position: absolute;
-  z-index: 6;
-  pointer-events: none;
-}
-
-.spark {
-  position: absolute;
-  border-radius: 50%;
-  animation: sparkBurst var(--dur) ease-out infinite var(--delay);
-}
-
-@keyframes sparkBurst {
-  0%   { transform: translate(0,0) scale(1.2); opacity: 1; }
-  70%  { opacity: 0.7; }
-  100% { transform: translate(var(--tx), var(--ty)) scale(0.1); opacity: 0; }
-}
-
-/* =============================================
-   MOON ZONE
-   ============================================= */
-.moon-zone {
-  position: relative;
+  top: 20px;
   width: 100%;
-  height: 190px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  margin-top: 36px;
+  font-size: 50px;
+  letter-spacing: 3px;
 }
 
-.halo {
-  position: absolute;
-  border-radius: 50%;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.h3 {
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(245,200,66,0.06) 0%, transparent 70%);
-  animation: haloPulse 3s ease-in-out infinite 0.4s;
-}
-.h2 {
-  width: 150px; height: 150px;
-  background: radial-gradient(circle, rgba(245,200,66,0.12) 0%, transparent 70%);
-  animation: haloPulse 3s ease-in-out infinite 0.2s;
-}
-.h1 {
-  width: 110px; height: 110px;
-  background: radial-gradient(circle, rgba(245,200,66,0.2) 0%, transparent 70%);
-  animation: haloPulse 3s ease-in-out infinite;
-}
-
-@keyframes haloPulse {
-  0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: 0.7; }
-  50%       { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
-}
-
-/* Crescent moon — circle with overlay cutout */
+/* Moon */
 .moon {
-  position: relative;
-  z-index: 2;
-  width: 78px; height: 78px;
-  background: linear-gradient(135deg, #ffe066, #f5c842, #e0a020);
+  position: absolute;
+  top: 100px;
+  right: 150px;
+  width: 120px;
+  height: 120px;
+  background: gold;
   border-radius: 50%;
-  box-shadow:
-    0 0 18px rgba(255,215,0,0.9),
-    0 0 40px rgba(255,215,0,0.5),
-    0 0 80px rgba(255,215,0,0.3);
-  animation: moonBob 5s ease-in-out infinite;
+  box-shadow: -25px 0 0 10px #0b1a3a;
 }
 
-/* Crescent cutout circle */
-.moon-cut {
+/* Stars */
+.star {
   position: absolute;
-  width: 62px; height: 62px;
-  background: #080b28;      /* Matches card background */
+  width: 3px;
+  height: 3px;
+  background: white;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* Lanterns */
+.lantern {
+  position: absolute;
+  width: 40px;
+  height: 60px;
+  background: gold;
+  border-radius: 10px;
+  box-shadow: 0 0 15px gold;
+  animation: swing 3s infinite ease-in-out;
+}
+
+.lantern::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 18px;
+  width: 3px;
+  height: 20px;
+  background: white;
+}
+
+/* Lantern positions */
+.lantern1 { left: 100px; top: 50px; }
+.lantern2 { left: 300px; top: 80px; }
+.lantern3 { left: 500px; top: 60px; }
+
+@keyframes swing {
+  0% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+/* Candles */
+.candle {
+  position: absolute;
+  bottom: 20px;
+  width: 20px;
+  height: 80px;
+  background: #fff3c4;
+  border-radius: 5px;
+}
+
+.candle1 { left: 40%; }
+.candle2 { left: 55%; }
+
+/* Flame */
+.flame {
+  position: absolute;
+  top: -20px;
+  left: 5px;
+  width: 10px;
+  height: 20px;
+  background: orange;
   border-radius: 50%;
-  top: -4px; left: 18px;
+  animation: flicker 0.2s infinite;
 }
 
-@keyframes moonBob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+@keyframes flicker {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
-
-.moon-sparkle {
-  position: absolute;
-  color: var(--gold2);
-  z-index: 3;
-  filter: drop-shadow(0 0 6px var(--gold));
-  animation: moonBob var(--dur, 4s) ease-in-out infinite var(--delay, 0s);
-}
-
-.ms1 { font-size:1rem;   top:10px; right:calc(50% - 75px); --dur:3.5s; --delay:0s; }
-.ms2 { font-size:0.7rem; top:50px; right:calc(50% - 90px); --dur:4s;   --delay:0.5s; }
-.ms3 { font-size:0.8rem; top:15px; left: calc(50% - 65px); --dur:3s;   --delay:1s; }
-
-/* =============================================
-   ORNAMENT LINES
-   ============================================= */
-.ornament-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 75%;
-  z-index: 3;
-  margin: 14px 0;
-}
-
-.orn-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(245,200,66,0.6), transparent);
-}
-
-.orn-gem {
-  font-size: 0.55rem;
-  color: var(--gold);
-  filter: drop-shadow(0 0 4px var(--gold));
-}
-
-/* =============================================
-   TITLE TEXT
-   ============================================= */
-.title-eid {
-  font-family: var(--font-title);
-  font-size: clamp(2rem, 7.5vw, 3rem);
-  font-weight: 700;
-  color: var(--gold2);
-  text-align: center;
-  letter-spacing: 0.04em;
-  z-index: 3;
-  padding: 0 24px;
-  text-shadow:
-    0 0 15px rgba(255,220,60,1),
-    0 0 35px rgba(255,200,40,0.7),
-    0 0 70px rgba(255,180,20,0.4);
-  animation: titlePulse 3s ease-in-out infinite;
-}
-
-@keyframes titlePulse {
-  0%, 100% { text-shadow: 0 0 15px rgba(255,220,60,1), 0 0 35px rgba(255,200,40,0.7), 0 0 70px rgba(255,180,20,0.4); }
-  50%       { text-shadow: 0 0 25px rgba(255,220,60,1), 0 0 55px rgba(255,200,40,0.9), 0 0 100px rgba(255,180,20,0.6); }
-}
-
-.title-arabic {
-  font-family: var(--font-arabic);
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
-  color: rgba(245,200,66,0.75);
-  text-align: center;
-  letter-spacing: 0.15em;
-  z-index: 3;
-  margin-top: 6px;
-  text-shadow: 0 0 20px rgba(245,200,66,0.4);
-}
-
-/* =============================================
-   BLESSING TEXT
-   ============================================= */
-.blessings {
-  text-align: center;
-  z-index: 3;
-  padding: 0 36px;
-  margin: 4px 0;
-}
-
-.b-line {
-  font-family: var(--font-body);
-  font-size: clamp(0.78rem, 2.2vw, 0.95rem);
-  color: var(--muted);
-  line-height: 2;
-  letter-spacing: 0.08em;
-  font-weight: 300;
-}
-
-/* =============================================
-   BOTTOM DIVIDER
-   ============================================= */
-.bottom-divider {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 60%;
-  z-index: 3;
-  margin: 16px 0 0;
-}
-
-.bd-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(245,200,66,0.4), transparent);
-}
-
-.bd-star {
-  color: var(--gold);
-  font-size: 0.7rem;
-  filter: drop-shadow(0 0 5px var(--gold));
-  animation: moonBob 3s ease-in-out infinite;
-}
-
-/* =============================================
-   MOSQUE SILHOUETTE
-   ============================================= */
-.mosque-area {
-  position: relative;
-  width: 100%;
-  height: 145px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  z-index: 3;
-  overflow: hidden;
-  margin-top: 8px;
-}
-
-.ground-glow {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 40px;
-  background: linear-gradient(to top, rgba(245,200,66,0.08), transparent);
-}
-
-.mosque {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 3px;
-  filter: drop-shadow(0 0 15px rgba(245,200,66,0.25));
-  padding-bottom: 12px;
-}
-
-.minaret { display: flex; flex-direction: column; align-items: center; }
-.mn-top  { width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:18px solid rgba(245,200,66,0.5); }
-.mn-body { width:12px; height:70px; background:rgba(245,200,66,0.22); }
-.mn-balcony { width:20px; height:5px; background:rgba(245,200,66,0.35); }
-.mn-base { width:16px; height:10px; background:rgba(245,200,66,0.22); }
-
-.main-dome { display:flex; flex-direction:column; align-items:center; }
-.dome-spire { width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:24px solid rgba(245,200,66,0.55); }
-.dome-arch  { width:100px; height:55px; background:rgba(245,200,66,0.22); border-radius:50px 50px 0 0; }
-.dome-body  { width:110px; height:40px; background:rgba(245,200,66,0.18); }
-.dome-window { position:relative; top:-30px; width:30px; height:36px; background:rgba(245,200,66,0.08); border:1px solid rgba(245,200,66,0.25); border-radius:15px 15px 0 0; }
+```
