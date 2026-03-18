@@ -1,105 +1,41 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eid Mubarak</title>
-  <link rel="stylesheet" href="eid_style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Amiri:wght@400;700&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>Eid Mubarak Card</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <canvas id="bgCanvas"></canvas>
+<div class="container">
 
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
+  <!-- Title -->
+  <h1>Eid Mubarak</h1>
 
-  <div class="card" id="card">
+  <!-- Moon -->
+  <div class="moon"></div>
 
-    <div class="corner c-tl"></div>
-    <div class="corner c-tr"></div>
-    <div class="corner c-bl"></div>
-    <div class="corner c-br"></div>
+  <!-- Stars container -->
+  <div id="stars"></div>
 
-    <div class="fw" id="fw1"></div>
-    <div class="fw" id="fw2"></div>
-    <div class="fw" id="fw3"></div>
-    <div class="fw" id="fw4"></div>
-    <div class="fw" id="fw5"></div>
-    <div class="fw" id="fw6"></div>
-    <div class="fw" id="fw7"></div>
-    <div class="fw" id="fw8"></div>
+  <!-- Lanterns -->
+  <div class="lantern lantern1"></div>
+  <div class="lantern lantern2"></div>
+  <div class="lantern lantern3"></div>
 
-    <div class="moon-zone">
-      <div class="halo h3"></div>
-      <div class="halo h2"></div>
-      <div class="halo h1"></div>
-      <div class="moon">
-        <div class="moon-cut"></div>
-      </div>
-      <div class="moon-sparkle ms1">✦</div>
-      <div class="moon-sparkle ms2">✧</div>
-      <div class="moon-sparkle ms3">✦</div>
-    </div>
-
-    <div class="ornament-line">
-      <span class="orn-line"></span>
-      <span class="orn-gem">◆</span>
-      <span class="orn-line"></span>
-      <span class="orn-gem">◆</span>
-      <span class="orn-line"></span>
-    </div>
-
-    <h1 class="title-eid">Eid Mubarak</h1>
-    <p class="title-arabic">عيد مبارك</p>
-
-    <div class="ornament-line">
-      <span class="orn-line"></span>
-      <span class="orn-gem">◆</span>
-      <span class="orn-line"></span>
-      <span class="orn-gem">◆</span>
-      <span class="orn-line"></span>
-    </div>
-
-    <div class="blessings">
-      <p class="b-line">May the magic of this blessed night</p>
-      <p class="b-line">fill your heart with eternal light</p>
-      <p class="b-line">and your life with infinite peace.</p>
-    </div>
-
-    <div class="bottom-divider">
-      <span class="bd-line"></span>
-      <span class="bd-star">✦</span>
-      <span class="bd-line"></span>
-    </div>
-
-    <div class="mosque-area">
-      <div class="ground-glow"></div>
-      <div class="mosque">
-        <div class="minaret left-mn">
-          <div class="mn-top"></div>
-          <div class="mn-body"></div>
-          <div class="mn-balcony"></div>
-          <div class="mn-base"></div>
-        </div>
-        <div class="main-dome">
-          <div class="dome-spire"></div>
-          <div class="dome-arch"></div>
-          <div class="dome-body"></div>
-          <div class="dome-window"></div>
-        </div>
-        <div class="minaret right-mn">
-          <div class="mn-top"></div>
-          <div class="mn-body"></div>
-          <div class="mn-balcony"></div>
-          <div class="mn-base"></div>
-        </div>
-      </div>
-    </div>
-
+  <!-- Candles -->
+  <div class="candle candle1">
+    <div class="flame"></div>
   </div>
 
-  <script src="eid_script.js"></script>
+  <div class="candle candle2">
+    <div class="flame"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+```
